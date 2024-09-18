@@ -56,7 +56,7 @@ public class Exercise1 {
             public void actionPerformed(ActionEvent e) {
                 frame.setTitle(title.getText());
                 frame.setSize(Integer.parseInt(width.getText()), Integer.parseInt(height.getText()));
-                if(checkBox.isSelected()) frame.setLocation((screenSize.width/2) - (Integer.parseInt(width.getText())/2), (screenSize.height/2)- (Integer.parseInt(height.getText()))/2);
+                if(checkBox.isSelected()) frame.setLocationRelativeTo(null);
             }
         });
 
