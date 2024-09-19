@@ -28,15 +28,14 @@ public class Exercise2 {
 
         frame = new JFrame("images");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
-        frame.setSize(800,800);
         currentImageName = new JLabel(files[0].getName()); // Nome da primeira imagem
         currentImage = new JLabel();
         currentImage.setIcon(new ImageIcon(files[0].getAbsolutePath()));
 
         addFrameContent();
         frame.setVisible(true);
+        frame.pack();
     }
 
     private void addFrameContent() {
@@ -61,6 +60,7 @@ public class Exercise2 {
                 if(!rightButton.isEnabled()) {
                     rightButton.setEnabled(true); // Ativar botão se estiver desativado
                     currentImage.setText("");
+                    currentFileIndex++;
 
                 }
                 // Verificar se existem imagens por mostrar
@@ -82,6 +82,7 @@ public class Exercise2 {
                 if(!leftButton.isEnabled()) {
                     leftButton.setEnabled(true); // Ativar botão se estiver desativado
                     currentImage.setText("");
+                    currentFileIndex--;
                 }
                 // Verificar se existem imagens por mostrar
                 if(currentFileIndex < (files.length - 1)){

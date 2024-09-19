@@ -22,13 +22,9 @@ public class Exercise1 {
         frame = new JFrame("Exercise 1");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-
         addFrameContent();
         frame.pack();
         open();
-
-
-
     }
 
     private void addFrameContent(){
@@ -54,8 +50,12 @@ public class Exercise1 {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setTitle(title.getText());
-                frame.setSize(Integer.parseInt(width.getText()), Integer.parseInt(height.getText()));
+                try {
+                    frame.setTitle(title.getText());
+                    frame.setSize(Integer.parseInt(width.getText()), Integer.parseInt(height.getText()));
+                } catch (NumberFormatException ex) {
+                    System.out.println("Invalid inputs");
+                }
                 if(checkBox.isSelected()) frame.setLocationRelativeTo(null);
             }
         });
