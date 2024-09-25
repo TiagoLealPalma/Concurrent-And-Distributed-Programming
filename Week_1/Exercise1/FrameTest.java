@@ -1,4 +1,4 @@
-package Week_1;
+package Week_1.Exercise1;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-public class Exercise0_FrameTest {
+public class FrameTest {
     private JFrame frame;
 
-    public Exercise0_FrameTest() {
+    public FrameTest() {
         frame = new JFrame("Test");
 
         // para que o botao de fechar a janela termine a aplicacao
@@ -55,7 +55,7 @@ public class Exercise0_FrameTest {
     }
 
     public static void main(String[] args) {
-        Exercise0_FrameTest window = new Exercise0_FrameTest();
+        FrameTest window = new FrameTest();
         window.open();
     }
 }

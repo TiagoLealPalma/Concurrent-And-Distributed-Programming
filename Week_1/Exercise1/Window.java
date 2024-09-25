@@ -1,4 +1,4 @@
-package Week_1;
+package Week_1.Exercise1;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,11 +12,11 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 
-public class Exercise1_Window {
+public class Window {
     private JFrame frame;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public Exercise1_Window(){
+    public Window(){
         frame = new JFrame("Exercise 1");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +63,6 @@ public class Exercise1_Window {
     private void open(){frame.setVisible(true);}
 
     public static void main(String[] args) {
-        Exercise1_Window test = new Exercise1_Window();
+        Window test = new Window();
     }
 }

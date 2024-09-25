@@ -1,4 +1,4 @@
-package Week_1;
+package Week_1.Exercise2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FilenameFilter;
 
-public class Exercise2_ImageViewer {
+public class ImageViewer {
     private String path;
     private File[] files;
     private JFrame frame;
@@ -16,7 +16,7 @@ public class Exercise2_ImageViewer {
     private int currentFileIndex = 0;
 
 
-    public Exercise2_ImageViewer(String path) {
+    public ImageViewer(String path) {
         this.path = path;
         files = new File(path).listFiles(new FilenameFilter() {
             @Override
@@ -101,7 +101,7 @@ public class Exercise2_ImageViewer {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Exercise2_ImageViewer newTest = new Exercise2_ImageViewer(path);
+                ImageViewer newTest = new ImageViewer(path);
             }
         });
     }
@@ -114,9 +114,10 @@ public class Exercise2_ImageViewer {
     }
 
 
+    // Run Configurations: Meter Path da diretoria Images (Path: "Week_1/Exercise2/Images")
     public static void main(String[] args) {
 
-        Exercise2_ImageViewer test = new Exercise2_ImageViewer(args[0]);
+        ImageViewer test = new ImageViewer(args[0]);
 
 
     }

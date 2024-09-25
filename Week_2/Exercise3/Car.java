@@ -1,4 +1,4 @@
-package Week_2.Exercise_3_Auxiliary;
+package Week_2.Exercise3;
 
 import java.util.Observable;
 

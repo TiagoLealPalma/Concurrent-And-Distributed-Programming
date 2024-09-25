@@ -1,4 +1,4 @@
-package Week_2.Exercise_3_Auxiliary;
+package Week_2.Exercise3;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class Track extends JComponent implements Observer{
     private int numCars;
     private int numSteps;
     private int[] carPositions;
-    private ImageIcon icon = new ImageIcon("Week_2/Exercise_3_Auxiliary/azul.gif");
+    private ImageIcon icon = new ImageIcon("Week_2/Exercise3/azul.gif");
     private boolean raceFinished = false;
 
     public Track(ArrayList<Car> cars, int numCars, int numSteps) {

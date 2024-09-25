@@ -1,4 +1,4 @@
-package Week_1;
+package Week_1.Extra1;
 
 import javax.swing.*;
 import javax.swing.border.Border;

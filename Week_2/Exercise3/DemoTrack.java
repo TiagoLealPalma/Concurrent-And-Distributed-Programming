@@ -1,12 +1,9 @@
-package Week_2;
-
-import Week_2.Exercise_3_Auxiliary.Car;
-import Week_2.Exercise_3_Auxiliary.Track;
+package Week_2.Exercise3;
 
 import javax.swing.JFrame;
 import java.util.ArrayList;
 
-public class Exercise3_DemoTrack {
+public class DemoTrack {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Demo Track");
