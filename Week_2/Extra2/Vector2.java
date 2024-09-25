@@ -61,7 +61,7 @@ public class Vector2 {
     public Vector2 normalize() {
         double length = magnitude();
         if (length != 0) {
-            return new Vector2(this.x / length, this.y / length);
+            return new Vector2((int)(this.x / length), (int)(this.y / length));
         }
         return new Vector2(0, 0);
     }
