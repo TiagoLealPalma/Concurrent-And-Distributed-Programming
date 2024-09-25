@@ -19,35 +19,38 @@ public class Ball extends Observable implements Runnable {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
         this.panel = frame;
-        speed = 2; // Pixels per second
+        speed = 2; // Pixels per update (fps * speed = pixels per second)
         size = 20;
         fps = 120;
         this.direction = new Vector2(1, 2).scale(speed);
     }
 
     public int getXCoord() {return this.xCoord;}
+    public void setXCoord(int xCoord) {this.xCoord = xCoord;}
     public int getYCoord() {return this.yCoord;}
+    public void setYCoord(int yCoord) {this.yCoord = yCoord;}
     public int getSize() {return this.size;}
 
     @Override
     public void run() {
+
         while(running){
-            // Handle collision
-            if(xCoord+direction.getX() + size >= panel.getWidth() || xCoord + direction.getX() <= 0)
+            // Handles Wall collision
+            if(xCoord + direction.getX() + size >= panel.getWidth() || xCoord + direction.getX() <= 0)
                 direction = new Vector2(-(int)direction.getX(), (int)(direction.getY()));
 
             if(yCoord + direction.getY() >= panel.getHeight() || yCoord + direction.getY() <= 0)
                 direction = new Vector2((int)direction.getX(), -(int)(direction.getY()));
 
             // Set new position
-            xCoord += direction.getX();
-            yCoord += direction.getY();
+            xCoord += (int) direction.getX();
+            yCoord += (int) direction.getY();
 
             // Update GUI
             setChanged();
             notifyObservers();
 
-            // Set FPS (16 ms = 60 fps)
+            // Set FPS
             try {
                 Thread.sleep(1000/fps);
             } catch (InterruptedException e) {
