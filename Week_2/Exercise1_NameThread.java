@@ -1,9 +1,9 @@
 package Week_2;
 
-public class NameThread extends Thread{
+public class Exercise1_NameThread extends Thread{
     private int identifier;
 
-    public NameThread(int identifier){
+    public Exercise1_NameThread(int identifier){
         this.identifier = identifier;
     }
 
@@ -45,8 +45,8 @@ public class NameThread extends Thread{
     public static void main(String[] args) {
         // Primeiro Teste
         System.out.println("Primeiro teste:");
-        NameThread thread = new NameThread(1);
-        NameThread thread2 = new NameThread(2);
+        Exercise1_NameThread thread = new Exercise1_NameThread(1);
+        Exercise1_NameThread thread2 = new Exercise1_NameThread(2);
         thread.start();
         thread2.start();
 
@@ -61,8 +61,8 @@ public class NameThread extends Thread{
 
         // Segundo Teste
         System.out.println("Segundo teste:");
-        NameThread secondThread = new NameThread(1);
-        NameThread secondThread2 = new NameThread(2);
+        Exercise1_NameThread secondThread = new Exercise1_NameThread(1);
+        Exercise1_NameThread secondThread2 = new Exercise1_NameThread(2);
         secondThread.start();
         secondThread2.start();
 

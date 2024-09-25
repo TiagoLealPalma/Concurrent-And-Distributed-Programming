@@ -6,12 +6,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Grid {
+public class Extra_ReusableComponent {
     private JFrame frame;
     private boolean crossTurn;
     
 
-    public Grid(String name, int rows, int cols) {
+    public Extra_ReusableComponent(String name, int rows, int cols) {
         crossTurn = true;
 
         frame = new JFrame(name);
@@ -52,7 +52,7 @@ public class Grid {
 
     public static void main(String[] args) {
 
-        Grid test = new Grid("teste", 3,3);
+        Extra_ReusableComponent test = new Extra_ReusableComponent("teste", 3,3);
         test.open();
     }
 }

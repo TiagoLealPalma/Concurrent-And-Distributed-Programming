@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FilenameFilter;
 
-public class Exercise2 {
+public class Exercise2_ImageViewer {
     private String path;
     private File[] files;
     private JFrame frame;
@@ -16,7 +16,7 @@ public class Exercise2 {
     private int currentFileIndex = 0;
 
 
-    public Exercise2(String path) {
+    public Exercise2_ImageViewer(String path) {
         this.path = path;
         files = new File(path).listFiles(new FilenameFilter() {
             @Override
@@ -101,7 +101,7 @@ public class Exercise2 {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Exercise2 newTest = new Exercise2(path);
+                Exercise2_ImageViewer newTest = new Exercise2_ImageViewer(path);
             }
         });
     }
@@ -116,7 +116,7 @@ public class Exercise2 {
 
     public static void main(String[] args) {
 
-        Exercise2 test = new Exercise2(args[0]);
+        Exercise2_ImageViewer test = new Exercise2_ImageViewer(args[0]);
 
 
     }

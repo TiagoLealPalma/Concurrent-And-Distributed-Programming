@@ -1,12 +1,11 @@
 package Week_2;
 
 import javax.swing.*;
-import javax.xml.namespace.QName;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CorridaDeCavalos {
+public class Exercise2_CorridaDeCavalos {
     private JFrame frame;
     private Cavalo cavalo1, cavalo2, cavalo3;
 
@@ -35,7 +34,7 @@ public class CorridaDeCavalos {
         }
     }
 
-    public CorridaDeCavalos(){
+    public Exercise2_CorridaDeCavalos(){
         frame = new JFrame("Corrida de cavalos");
         frame.setSize(200,100);
         frame.setLocationRelativeTo(null); // Centra a janela
@@ -81,6 +80,6 @@ public class CorridaDeCavalos {
     }
 
     public static void main(String[] args) {
-        new CorridaDeCavalos();
+        new Exercise2_CorridaDeCavalos();
     }
 }

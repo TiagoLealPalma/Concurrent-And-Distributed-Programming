@@ -8,17 +8,15 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 
-public class Exercise1 {
+public class Exercise1_Window {
     private JFrame frame;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public Exercise1 (){
+    public Exercise1_Window(){
         frame = new JFrame("Exercise 1");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +63,6 @@ public class Exercise1 {
     private void open(){frame.setVisible(true);}
 
     public static void main(String[] args) {
-        Exercise1 test = new Exercise1();
+        Exercise1_Window test = new Exercise1_Window();
     }
 }

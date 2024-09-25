@@ -1,19 +1,22 @@
-package Week_2.Exercise_3;
+package Week_2.Exercise_3_Auxiliary;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class Track extends JComponent implements Observer{
+    private ArrayList<Car> cars;
     private int numCars;
     private int numSteps;
     private int[] carPositions;
-    private ImageIcon icon = new ImageIcon("Week_2/Exercise_3/azul.gif");
+    private ImageIcon icon = new ImageIcon("Week_2/Exercise_3_Auxiliary/azul.gif");
+    private boolean raceFinished = false;
 
-    public Track(int numCars, int numSteps) {
+    public Track(ArrayList<Car> cars, int numCars, int numSteps) {
+        this.cars = cars;
         this.numCars = numCars;
         this.numSteps = numSteps;
         carPositions = new int[numCars];
@@ -47,5 +50,13 @@ public class Track extends JComponent implements Observer{
         moveCar(updatedCar.getId(), updatedCar.getPosition());
         // Redraw everything!
         invalidate();
+
+        if(updatedCar.getPosition() == numSteps && !raceFinished) {
+            raceFinished = true;
+            for(Car car: cars){
+                car.stop();
+            }
+            JOptionPane.showMessageDialog(this, updatedCar.getName() + " has finished the race");
+        }
     }
 }
