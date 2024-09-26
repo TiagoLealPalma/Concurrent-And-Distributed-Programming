@@ -5,6 +5,7 @@ import java.util.Observable;
 
 public class Player extends Observable implements Runnable{
     private int position;
+    private int size;
     private JPanel panel;
     private boolean isLeft;
     private boolean moveUp = false;
@@ -14,12 +15,17 @@ public class Player extends Observable implements Runnable{
     Player(boolean isLeft, JPanel panel) {
         this.panel = panel;
         this.isLeft = isLeft;
+        size = 100;
         position = 0;
     }
+
+    public int getSize() { return size; }
 
     public int getPosition() {
         return position;
     }
+
+    public void setPosition(int position) { this.position = position; }
 
     public void setMoveUp(boolean moveUp) {
         this.moveUp = moveUp;

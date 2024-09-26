@@ -9,14 +9,14 @@ public class Main {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
         // Create the panel
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBackground(Color.getHSBColor(52,11.8f, 99.6f));
-        panel.setPreferredSize(new Dimension(800, 800)); // Use preferred size
+        panel.setBackground(Color.darkGray);
+        panel.setPreferredSize(new Dimension(1000, 700)); // Use preferred size
 
         panel.setFocusable(true); // Make sure the panel is focusable
         panel.requestFocusInWindow(); // Request focus so that it can receive key events
@@ -28,11 +28,8 @@ public class Main {
         // Sets the frame size before initializing the ball
         frame.add(panel, BorderLayout.CENTER);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-        // Initializes the ball
-        Ball ball = new Ball(panel.getWidth() / 2, panel.getHeight() / 2, panel);
-        Thread thread = new Thread(ball);
 
         // Initializes the players
         Player left = new Player(true, panel);
@@ -40,6 +37,10 @@ public class Main {
         Thread leftThread = new Thread(left);
         leftThread.start();
         new Thread(right).start();
+
+        // Initializes the ball
+        Ball ball = new Ball(panel.getWidth() / 2, panel.getHeight() / 2, panel, left, right);
+        Thread thread = new Thread(ball);
 
         Arena arena = new Arena(ball, left, right);
         ball.addObserver(arena);
@@ -61,6 +62,7 @@ public class Main {
                 thread.start();
                 frame.setResizable(false);
                 button.setEnabled(false);
+                frame.setLocationRelativeTo(null);
             }
         });
 
