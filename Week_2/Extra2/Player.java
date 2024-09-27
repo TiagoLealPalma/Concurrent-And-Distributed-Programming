@@ -6,6 +6,7 @@ import java.util.Observable;
 public class Player extends Observable implements Runnable{
     private int position;
     private int size;
+    private int points = 0;
     private JPanel panel;
     private boolean isLeft;
     private boolean moveUp = false;
@@ -16,7 +17,19 @@ public class Player extends Observable implements Runnable{
         this.panel = panel;
         this.isLeft = isLeft;
         size = 100;
-        position = 0;
+        position = panel.getHeight()/2;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void incrementPoints() {
+        this.points++;
     }
 
     public int getSize() { return size; }

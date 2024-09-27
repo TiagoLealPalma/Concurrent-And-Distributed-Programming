@@ -6,7 +6,9 @@ import java.awt.event.*;
 
 public class Main {
 
+
     public static void main(String[] args) {
+
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -40,7 +42,7 @@ public class Main {
 
         // Initializes the ball
         Ball ball = new Ball(panel.getWidth() / 2, panel.getHeight() / 2, panel, left, right);
-        Thread thread = new Thread(ball);
+        Thread startThread = new Thread(ball);
 
         Arena arena = new Arena(ball, left, right);
         ball.addObserver(arena);
@@ -59,7 +61,7 @@ public class Main {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                thread.start();
+                startThread.start();
                 frame.setResizable(false);
                 button.setEnabled(false);
                 frame.setLocationRelativeTo(null);
@@ -71,6 +73,8 @@ public class Main {
             public void componentResized(ComponentEvent e) {
                 ball.setXCoord(panel.getWidth() / 2);
                 ball.setYCoord(panel.getHeight() / 2);
+                left.setPosition((panel.getHeight()/2)-(left.getSize()/2));
+                right.setPosition((panel.getHeight()/2)-(right.getSize()/2));
                 panel.revalidate();
                 panel.repaint();
             }

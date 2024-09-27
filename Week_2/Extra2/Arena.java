@@ -26,7 +26,12 @@ public class Arena extends JComponent implements Observer {
 
         // Paints the sphere
         g.setColor(Color.white);
-        g.fillOval(ball.getXCoord(), ball.getYCoord(), ball.getSize(), ball.getSize());
+        g.fillOval(ball.getXCoord()-(ball.getSize()/2), // Top left corner x position
+                ball.getYCoord() - (ball.getSize()/2),      // Top left corner y position
+                ball.getSize(), ball.getSize());
+
+        // g.drawLine(getWidth()-50, 0 , getWidth()-50, getHeight());
+        // g.drawLine(0, getHeight()-1 , getWidth(), getHeight()-1);
 
         // Paints the rectangles
         g.fillRect(25, left.getPosition(), 25, left.getSize());
