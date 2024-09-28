@@ -24,19 +24,29 @@ public class Arena extends JComponent implements Observer {
         Graphics2D g2d = (Graphics2D) g;
 
 
+
+        // Paint the middle line
+        g.setColor(Color.lightGray);
+        g.fillRect(getWidth()/2 - 1, 0 , 2, getHeight());
+
+        // Paint the points of which player
+        Font scorefont = new Font("Monospaced", Font.BOLD, 80);
+        g.setFont(scorefont);
+        g.drawString(String.valueOf(left.getPoints()), getWidth()/4, getHeight()/4);
+        g.drawString(String.valueOf(right.getPoints()), getWidth()*3/4, getHeight()/4);
+
         // Paints the sphere
         g.setColor(Color.white);
         g.fillOval(ball.getXCoord()-(ball.getSize()/2), // Top left corner x position
                 ball.getYCoord() - (ball.getSize()/2),      // Top left corner y position
                 ball.getSize(), ball.getSize());
 
-        // g.drawLine(getWidth()-50, 0 , getWidth()-50, getHeight());
-        // g.drawLine(0, getHeight()-1 , getWidth(), getHeight()-1);
-
         // Paints the rectangles
-        g.fillRect(25, left.getPosition(), 25, left.getSize());
+        g.setColor(Color.white);
+        g.fillRect(35, left.getPosition(), 15, left.getSize());
+
         // - 25 offset & - 25 width
-        g.fillRect(getWidth()-50, right.getPosition(), 25, right.getSize());
+        g.fillRect(getWidth()-50, right.getPosition(), 15, right.getSize());
     }
 
     @Override

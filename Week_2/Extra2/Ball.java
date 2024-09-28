@@ -7,18 +7,16 @@ import java.util.Random;
 import java.util.Vector;
 
 public class Ball extends Observable implements Runnable {
-    private int xCoord;
-    private int yCoord;
-    private int size;
-    private int radius;
+    private int xCoord, yCoord;
+    private final int size;
+    private final int radius;
     private int speed;
-    private int fps;
+    private final int fps;
     private Random rand = new Random();
     private Vector2 direction;
     private JPanel panel;
     private volatile boolean running = true;
     private Player leftPlayer, rightPlayer;
-    private BallListener listener;
 
     public Ball(int xCoord, int yCoord, JPanel frame, Player leftPlayer, Player rightPlayer) {
         this.xCoord = xCoord;
@@ -26,7 +24,6 @@ public class Ball extends Observable implements Runnable {
         this.panel = frame;
         this.leftPlayer = leftPlayer;
         this.rightPlayer = rightPlayer;
-        this.listener = listener;
         speed = 2; // Pixels per update (fps * speed = pixels per second)
         size = 20;
         radius = size/2;
@@ -90,17 +87,17 @@ public class Ball extends Observable implements Runnable {
     private void handleWallCollision() {
         // Handles side wall collision
         if(xCoord + radius >= panel.getWidth()){
-            rightPlayer.incrementPoints();
+            leftPlayer.incrementPoints();
             setPosition(new Position(panel.getWidth()/2, panel.getHeight()/2));
-            speed = -2;
+            speed = 2;
             direction = new Vector2(speed, calculateDirY((int)rand.nextInt(0,100)));
 
         }
 
         if(xCoord - radius <= 0){
-            leftPlayer.incrementPoints();
+            rightPlayer.incrementPoints();
             setPosition(new Position(panel.getWidth()/2, panel.getHeight()/2));
-            speed = 2;
+            speed = -2;
             direction = new Vector2(speed, calculateDirY((int)rand.nextInt(0,100)));
         }
 
@@ -114,13 +111,17 @@ public class Ball extends Observable implements Runnable {
         // Get the boundaries from each player
         int leftPlayerBound = 50;
         int rightPlayerBound = panel.getWidth() - 50;
+        int speedIncrement = 1;
+        if(Math.abs(direction.getX()) > 7 ) speedIncrement = 0;
 
         // Left player collision (15 pixels x redundancy)
         if(xCoord - radius <= leftPlayerBound && xCoord - radius >= leftPlayerBound - 15){
             if(yCoord + radius >= leftPlayer.getPosition() &&
                     yCoord - radius <= (leftPlayer.getPosition() + leftPlayer.getSize())){
                 int impactPos = Math.min(100, Math.max(0, (yCoord - leftPlayer.getPosition())));
-                direction = new Vector2(-(int)(direction.getX()-1), calculateDirY(impactPos));
+
+
+                direction = new Vector2(-(int)(direction.getX()-speedIncrement), calculateDirY(impactPos));
             }
         }
 
@@ -129,7 +130,7 @@ public class Ball extends Observable implements Runnable {
             if(yCoord + radius >= rightPlayer.getPosition() &&
                     yCoord - radius <= (rightPlayer.getPosition() + rightPlayer.getSize())){
                 int impactPos = Math.min(100, Math.max(0, (yCoord - rightPlayer.getPosition())));
-                direction = new Vector2(-(int)(direction.getX()+1), calculateDirY(impactPos));
+                direction = new Vector2(-(int)(direction.getX()+speedIncrement), calculateDirY(impactPos));
             }
         }
     }
@@ -138,7 +139,6 @@ public class Ball extends Observable implements Runnable {
     private int calculateDirY(int impactPosition){
         return (int)(0.1 * impactPosition - 5);
     }
-
 
     private void stop(){
         running = false;

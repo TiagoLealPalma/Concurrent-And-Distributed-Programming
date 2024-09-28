@@ -7,6 +7,7 @@ public class Player extends Observable implements Runnable{
     private int position;
     private int size;
     private int points = 0;
+    private int speed;
     private JPanel panel;
     private boolean isLeft;
     private boolean moveUp = false;
@@ -17,6 +18,7 @@ public class Player extends Observable implements Runnable{
         this.panel = panel;
         this.isLeft = isLeft;
         size = 100;
+        speed = 6;
         position = panel.getHeight()/2;
     }
 
@@ -48,17 +50,21 @@ public class Player extends Observable implements Runnable{
         this.moveDown = moveDown;
     }
 
+    public void incrementSpeed() {
+        this.speed++;
+    }
+
     @Override
     public void run() {
         while(running){
-            if(moveUp){
-                position -= 5;
+            if(moveUp && position > 0){
+                position -= speed;
                 setChanged();
                 notifyObservers();
             }
 
-            if(moveDown){
-                position += 5;
+            if(moveDown && position < panel.getHeight() - size){
+                position += speed;
                 setChanged();
                 notifyObservers();
             }
