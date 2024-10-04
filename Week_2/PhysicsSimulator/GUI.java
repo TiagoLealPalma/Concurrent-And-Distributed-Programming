@@ -2,18 +2,18 @@ package Week_2.PhysicsSimulator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class GUI extends JPanel implements ActionListener {
 
     private Timer timer;
     private ArrayList<Ball> balls;
-    private PhysicsEngine engine;
+    public PhysicsEngine engine;
     private JPanel panel;
     private final int fps = 120;
     private long lastUpdatedTime;
+    private Dimension mousePointer;
 
     public GUI(JPanel panel){
         this.panel = panel;
@@ -30,6 +30,10 @@ public class GUI extends JPanel implements ActionListener {
         lastUpdatedTime = System.nanoTime();
         timer = new Timer(1000/fps, this);
         timer.start();
+    }
+
+    public void setEngineCursor(boolean value, Dimension cursorCoords){
+        engine.setMagnetic(value, cursorCoords);
     }
 
     @Override
@@ -60,7 +64,8 @@ public class GUI extends JPanel implements ActionListener {
             ballCounter++;
         }
         g.drawString("Height:  " + String.valueOf(panel.getHeight()), 50 , 60);
-        g.drawString("Radius:  " + String.valueOf(balls.getFirst().getRadius()), 50 , 90);
+        g.drawString("Width:  " + String.valueOf(panel.getWidth()), 250 , 60);
+        g.drawString("Radius:  " + String.valueOf(balls.get(0).getRadius()), 50 , 90);
 
     }
 
@@ -87,11 +92,36 @@ public class GUI extends JPanel implements ActionListener {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        // Create the GUI instance before the listener, so we can access its engine
+        GUI gui = new GUI(panel);
+
+        // MouseListener added directly to panel
+        panel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                gui.engine.setMagnetic(true, new Dimension(e.getX(), e.getY()));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                gui.engine.setMagnetic(false, new Dimension(0, 0));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
+
         // Listener for the start button (So the GUI can start with proper sizes)
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GUI gui = new GUI(panel);
                 panel.add(gui, BorderLayout.CENTER);
                 panel.revalidate();
                 panel.repaint();
@@ -99,4 +129,5 @@ public class GUI extends JPanel implements ActionListener {
             }
         });
     }
+
 }
