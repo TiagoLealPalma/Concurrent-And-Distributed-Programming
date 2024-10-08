@@ -11,6 +11,8 @@ public class PhysicsEngine {
     private double timeAccumulator = 0.0;
     private double time = System.currentTimeMillis();
 
+    // Suavizar perdas de energia com função y = -log x + 1
+
     private boolean magnetic = false;
     private double magneticForce = 0.1;
     private Dimension cursorCoords;

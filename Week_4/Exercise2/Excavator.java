@@ -15,8 +15,8 @@ public class Excavator extends Thread{
 
         while(!isInterrupted()) {
             try {
-                sleep(1000); // Simular a mineração
-                scale.addGold(rand.nextDouble(0, 1));
+                sleep(500); // Simular a mineração
+                scale.addGold((double) ((int) (rand.nextDouble(0, 1) * 1000)) /1000);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

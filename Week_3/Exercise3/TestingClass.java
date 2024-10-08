@@ -63,7 +63,7 @@ public class TestingClass {
             System.out.println("\n\nDinheiro Depositado pelas threads: " + safeSummedAmmount );
             System.out.println("Dinheiro na conta: " + safeAccount.getBalance() );
             System.out.println("Dinheiro perdido pela má programação do sistema: " + (safeSummedAmmount - safeAccount.getBalance()));
-            System.out.println("Pasteis de nata maximizados");
+            System.out.println("Pasteis de nata maximizados :)");
 
 
     }

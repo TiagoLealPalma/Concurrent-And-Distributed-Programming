@@ -18,6 +18,7 @@ public class Scale {
         while (currentWeight >= maxWeight) {
             wait();
         }
+        System.out.println("Gold: " + gold);
         currentWeight += gold;
         weightDisplayer.setText(String.valueOf(currentWeight));
         notifyAll();
@@ -33,8 +34,24 @@ public class Scale {
     }
 
     public static void main(String[] args) {
+
         JFrame frame = new JFrame();
+
+        frame.setSize(50,50);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Scale");
+
+        JTextField weightDisplayer = new JTextField(String.valueOf(0));
+        weightDisplayer.setEditable(false);
+        frame.add(weightDisplayer);
+        frame.setVisible(true);
+
+
+        Scale scale = new Scale(weightDisplayer);
+        Excavator excavator = new Excavator(scale);
+        excavator.start();
+        Goldsmith goldsmith = new Goldsmith(scale);
+        goldsmith.start();
     }
 }
