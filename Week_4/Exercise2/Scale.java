@@ -23,7 +23,6 @@ public class Scale {
                 System.out.println(Thread.currentThread().getName() + ": waiting");
                 wait();
             } catch (InterruptedException e) {
-
                 return;     // Caso seja interrompida deve sair do metodo para que possa voltar a sua classe e parar de
                             // forma graciosa
             }
@@ -34,7 +33,7 @@ public class Scale {
         notifyAll();
     }
 
-    public synchronized void getGold() {
+    public synchronized double getGold() {
         try {
             while (currentWeight < maxWeight) {
                 System.out.println(Thread.currentThread().getName() + ": waiting");
@@ -42,11 +41,12 @@ public class Scale {
             }
             Thread.sleep(800); // Dar espaço para aparecer o valor maximo e simular o tirar do ouro
         } catch (InterruptedException e) {
-            return;
+            return 0;
         }
         currentWeight -= 12.5;
         weightDisplayer.setText(String.format("%.3f",currentWeight));
         notifyAll();
+        return 12.5;
     }
 
     public static void main(String[] args) {

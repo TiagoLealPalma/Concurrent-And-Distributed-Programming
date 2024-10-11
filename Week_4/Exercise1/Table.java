@@ -1,7 +1,7 @@
 package Week_4.Exercise1;
 
 public class Table {
-    private class Javali{
+    public static class Javali{
         private String cookedBy;
 
         public Javali(String cookedBy){
@@ -18,7 +18,7 @@ public class Table {
     }
 
     // Meter a comida na mesa
-    public synchronized void setJavaliOnTable(String cookedBy){
+    public synchronized void setJavaliOnTable(String cookedBy, Javali javali){
 
         while(javalisOnTable >= table.length){  // Enquanto a mesa estiver cheia
             try {
@@ -28,7 +28,7 @@ public class Table {
             } catch (InterruptedException e){
             }
         }
-        table[javalisOnTable] = new Javali(cookedBy);
+        table[javalisOnTable] = javali;
         javalisOnTable++;
         javalisCooked++;
         drawTable();
@@ -69,6 +69,7 @@ public class Table {
         Cook[] cooks = new Cook[5];
         Eater[] eaters = new Eater[5];
 
+        // Instaciar e iniciar as Threads
         for (int i = 0; i < 5; i++) {
             cooks[i] = new Cook(table);
             cooks[i].start();
@@ -76,6 +77,7 @@ public class Table {
             eaters[i].start();
         }
 
+        // Esperar
         try{
             Thread.sleep(10000);
         } catch (InterruptedException e) {

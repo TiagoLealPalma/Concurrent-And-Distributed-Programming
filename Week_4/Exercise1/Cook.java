@@ -13,7 +13,7 @@ public class Cook extends Thread {
         while(running){
             try {
                 sleep(700 + (int)(Math.random() * 1000));
-                table.setJavaliOnTable(getName());
+                table.setJavaliOnTable(getName(), new Table.Javali("cook"));
             } catch (InterruptedException e) {
             }
         }
