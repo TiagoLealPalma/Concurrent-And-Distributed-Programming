@@ -9,6 +9,7 @@ public class TextRepository {
 	private int numChunks;
 	private int numReceivedResults;
 
+
 	public TextRepository(String text, String stringToBeFound, int chunkSize) {
 		for(int i=0; i<text.length(); i+=chunkSize) {
 			chunks.add(new TextChunk(text.substring(i, (int)Math.min(i+chunkSize,text.length())), 
@@ -18,19 +19,15 @@ public class TextRepository {
 	}
 
 	public synchronized TextChunk getChunk() {
-		// TODO
-
-		return null;
+		if(chunks.isEmpty()) return null;
+		return chunks.remove(0);
 	}
 
 	public synchronized void submitResult(TextChunk chunk) {
-		// TODO
+		foundChunks.add(chunk);
 	}
 
 	public synchronized List<TextChunk> getAllMatches() throws InterruptedException {
-		// TODO
-		
-		return null;
-
+		return foundChunks;
 	}
 }

@@ -2,15 +2,18 @@ package Week_5.Exercise1;
 
 import java.util.List;
 
+import static java.lang.String.join;
+
 public class Main {
 	static final int NUM_THREADS=10;
 	static final int STRING_LENGTH=1024001;
 	static final int CHUNK_LENGTH=1024;
 	static final String STRING_TO_BE_FOUND="huig";
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		SearcherThread[] threads=new SearcherThread[NUM_THREADS];
-		
+		boolean second = false;
+
 		// Gera um 'documento de texto' e carrega-o no repositorio 
 		RandomString rs=new RandomString(STRING_LENGTH);
 		String text = rs.nextString();
@@ -21,16 +24,29 @@ public class Main {
 			threads[i]=new SearcherThread(textRepository);
 			threads[i].start();
 		}
-		
-		// Para versao 2
-				try {
-					List<TextChunk> results= textRepository.getAllMatches();
-					if(results!=null)
-						for(TextChunk chunk:results)
-							System.out.println("Encontrado em "+chunk);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
+		for(int i=0; i!=NUM_THREADS;i++){
+            try {
+                threads[i].join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+		System.out.println("Threads found " + textRepository.getAllMatches().size() + " matches.");
+		if(second) {
+			// Para versao 2
+			try {
+				List<TextChunk> results = textRepository.getAllMatches();
+				if (results != null)
+					for (TextChunk chunk : results)
+						System.out.println("Encontrado em " + chunk);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
+
+
 }
