@@ -12,7 +12,6 @@ public class Main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		SearcherThread[] threads=new SearcherThread[NUM_THREADS];
-		boolean second = false;
 
 		// Gera um 'documento de texto' e carrega-o no repositorio 
 		RandomString rs=new RandomString(STRING_LENGTH);
