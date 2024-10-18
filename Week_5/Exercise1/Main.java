@@ -32,20 +32,7 @@ public class Main {
                 throw new RuntimeException(e);
             }
         }
-
 		System.out.println("Threads found " + textRepository.getAllMatches().size() + " matches.");
-		if(second) {
-			// Para versao 2
-			try {
-				List<TextChunk> results = textRepository.getAllMatches();
-				if (results != null)
-					for (TextChunk chunk : results)
-						System.out.println("Encontrado em " + chunk);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
 
