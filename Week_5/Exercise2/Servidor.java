@@ -51,18 +51,29 @@ public class Servidor {
 
 	public synchronized SongRequest getSongRequest() {
 		if(!running) return null;
-		while(waitlist.isEmpty())
+		SongRequest requestToReturn = null;
+		while(waitlist.isEmpty()) {
 			try {
 				wait();
-				if(!running) return null;
-			}catch (InterruptedException e){
+				if (!running) return null;
+			} catch (InterruptedException e) {
 				return null;
 			}
-		SongRequest requestToReturn = waitlist.remove(0);
+		}
+
+		requestToReturn = waitlist.remove(0);
 
 		// Remove all occurrences of this song from the waitlist since this thread is going to handle these request
 		// for multiple clients.
-		while(waitlist.contains(requestToReturn)) waitlist.remove(requestToReturn);
+		// This is the most important optimization because it prevents the repos from getting a request that was already
+		// fulfilled by an earlier repo
+		Iterator<SongRequest> it = waitlist.iterator();
+		while(it.hasNext()) {
+			SongRequest request = it.next();
+			if(request.getSongTitle().equals(requestToReturn.getSongTitle()))
+				it.remove();
+		}
+
 		return requestToReturn;
 	}
 
@@ -87,6 +98,7 @@ public class Servidor {
 			if(client.isEmpty())
 				notifyAll();
 		}
+		while(waitlist.contains(song)) waitlist.remove(song); // Clean the request for this song fulfilled by this method
 		return clientCounter;
 	}
 

@@ -32,10 +32,11 @@ public class Repository extends Thread {
 					if(Objects.equals(request.getSongTitle(), requestToHandle.getSongTitle())) {
 						int result = -1;
                         if (( result = server.uploadSong(request)) != -1)
-							System.out.println(getName()+": " + request.getSongTitle() + " was successfully uploaded to" + result + " client" + (result > 0 ? "s" : null));
-                        else
-                            System.out.println(getName() + ": Error occurred on upload of " + request.getSongTitle());
-
+							System.out.println(getName()+": " + request.getSongTitle() + " was successfully uploaded to " + result + " client" + (result != 1 ? "s" : ""));
+                        else {
+							requestToHandle = null;
+							System.out.println(getName() + ": Error occurred on upload of " + request.getSongTitle());
+						}
                     }
 				}
 			}
@@ -43,5 +44,8 @@ public class Repository extends Thread {
 		}
 	}
 
+	public SongRequest getRequestBeingHandled(){
+		return requestToHandle;
+	}
 
 }

@@ -5,17 +5,17 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		Servidor servidor = new Servidor(NUM_REPOSITORIOS);
+		Client[] clients = new Client[20];
 
-		Client client1 = new Client(0, servidor, 4);
-		Client client2 = new Client(1, servidor, 8);
-		Client client3 = new Client(2, servidor, 13);
-		client1.start();
-		client2.start();
-		client3.start();
+		for (int i = 0; i < 20; i++) {
+			clients[i] = new Client(i,servidor,10);
+			clients[i].start();
+		}
 
-		client1.join();
-		client2.join();
-		client3.join();
+		for (int i = 0; i < 20; i++) {
+			clients[i].join();
+		}
+
 		Thread.sleep(500);
 		servidor.stopServer();
 	}
