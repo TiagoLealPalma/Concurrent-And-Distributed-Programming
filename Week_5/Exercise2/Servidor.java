@@ -41,9 +41,7 @@ public class Servidor {
 			try {
 				wait();
 				if(!running) return null;
-			} catch (InterruptedException e) {
-				return null;
-			}
+			} catch (InterruptedException e) {return null;}
 		}
 		// Remove from progress map
 		return inProgress.remove(requestId);
@@ -56,9 +54,7 @@ public class Servidor {
 			try {
 				wait();
 				if (!running) return null;
-			} catch (InterruptedException e) {
-				return null;
-			}
+			} catch (InterruptedException e) {return null;}
 		}
 
 		requestToReturn = waitlist.remove(0);
@@ -98,7 +94,7 @@ public class Servidor {
 			if(client.isEmpty())
 				notifyAll();
 		}
-		while(waitlist.contains(song)) waitlist.remove(song); // Clean the request for this song fulfilled by this method
+
 		return clientCounter;
 	}
 

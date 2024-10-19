@@ -103,12 +103,11 @@ public class Table {
 
     // ------------------------- UI -------------------------------------------------------------------------------
 
-    // Method to update the card on the table
     public void updateTableCard(String card) {
         label.setText("Table Card: [" + card + "]");
     }
 
-    // Method to add a message to the game log
+
     public void logGameMessage(String message) {
         SwingUtilities.invokeLater(()->{
             gameLog.append(message + "\n");
@@ -127,11 +126,5 @@ public class Table {
             players[i] = new Player("Player " + String.valueOf(i), table);
             players[i].start();
         }
-
-
-
-
     }
-
-
 }
