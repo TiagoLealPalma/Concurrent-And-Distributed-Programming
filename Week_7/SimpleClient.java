@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class SimpleClient {
     private BufferedReader in;
@@ -29,13 +30,16 @@ public class SimpleClient {
     }
 
     private void sendMessages() throws IOException {
-        for (int i = 0; i < 10; i++) {
-            out.println("ola " + i);
-            String str = in.readLine();
-            System.out.println(str);
-            try{Thread.sleep(3000);}catch(InterruptedException e){}
+        Scanner scanner = new Scanner(System.in);
+        String message = "";
+
+        while(true) {
+            System.out.println(in.readLine());
+            if(message.equals("exit")) break;
+            message = scanner.nextLine();
+            out.println(message);
         }
-        out.println("FIM");
+        out.println("Exiting!");
     }
 
 

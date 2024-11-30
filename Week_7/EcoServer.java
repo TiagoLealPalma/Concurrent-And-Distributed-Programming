@@ -1,5 +1,4 @@
 package Week_7;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -28,19 +27,17 @@ public class EcoServer {
     }
 
     public void server() throws IOException {
+        out.println("Server is running");
         while(true){
             String str = in.readLine();
             if(str.equals("Fim")) break;
             System.out.println("Eco: " + str);
-            out.println(str);
+            out.println("Recieved: " + str);
         }
     }
 
     public static void main(String[] args) throws IOException {
         EcoServer server = new EcoServer();
         server.startServing();
-
-        SimpleClient client = new SimpleClient();
-        client.runClient();
     }
 }
