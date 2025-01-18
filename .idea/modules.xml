@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Concurrent-And-Distributed-Programming.iml" filepath="$PROJECT_DIR$/.idea/Concurrent-And-Distributed-Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Week_6/Week_6.iml" filepath="$PROJECT_DIR$/Week_6/Week_6.iml" />
     </modules>
   </component>
 </project>
