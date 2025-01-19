@@ -12,4 +12,8 @@ public class BlockReplies implements Serializable {
     public int getIndex() {
         return index;
     }
+
+    public int getData() {
+       return 1;
+    }
 }
