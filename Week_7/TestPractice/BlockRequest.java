@@ -1,7 +1,15 @@
 package Week_7.TestPractice;
 
-public class BlockRequest {
-    public BlockRequest() {
-        
+import java.io.Serializable;
+
+public class BlockRequest implements Serializable {
+    private int index;
+
+    public BlockRequest(int index) {
+        this.index=index;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

@@ -1,9 +1,15 @@
 package Week_7.TestPractice;
 
-public class BlockReplies {
+import java.io.Serializable;
+
+public class BlockReplies implements Serializable {
     int index;
 
    public BlockReplies (int index) {
         this.index = index;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }
