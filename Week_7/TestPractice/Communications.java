@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Communications {
@@ -14,7 +15,7 @@ public class Communications {
     public volatile boolean downloading = false;
     private ArrayList<BlockReplies> replies;
     private SharedWriter writer;
-    private HashMap<Integer, ObjectOutputStream> outs = new HashMap<Integer, ObjectOutputStream>();
+    private List<ObjectOutputStream> outs = new ArrayList<>();
 
 
     public Communications(){
@@ -37,7 +38,8 @@ public class Communications {
         try(ObjectOutputStream out = new ObjectOutputStream(s.getOutputStream());
             ObjectInputStream in = new ObjectInputStream(s.getInputStream());){
 
-            outs.put(s.getPort(), out); // Guardar o canal de saida para enviar mensagem da Main Thread,
+            synchronized (outs){
+            outs.add(s.getPort(), out);} // Guardar o canal de saida para enviar mensagem da Main Thread,
                                             // para iniciar o processo de download
 
             while(running){
@@ -53,7 +55,6 @@ public class Communications {
                     writer.put(br);
                 }
 
-
                 if(downloading){ // Se estiver a fazer download, pede o proximo bloco ao recurso partilhado
                     out.writeObject(writer.take());
                     s.setSoTimeout(2000); // Mete tempo de resposta maximo de 2 segundos
@@ -65,14 +66,24 @@ public class Communications {
 
     }
 
+    private void connect(String addr, int port){
+        new Thread(()-> {
+            try {
+                clientHandler(new Socket(addr,port));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
     private synchronized BlockReplies getReplies(int index) {
         return replies.size() > index ? replies.get(index) : new BlockReplies(-1);
     }
 
     private void startDownload() throws IOException {
         downloading = true;
-        for (Map.Entry<Integer, ObjectOutputStream> entry : outs.entrySet()) {
-            entry.getValue().writeObject(writer.take());
+        for (ObjectOutputStream out : outs) {
+            out.writeObject(writer.take());
         }
     }
 
