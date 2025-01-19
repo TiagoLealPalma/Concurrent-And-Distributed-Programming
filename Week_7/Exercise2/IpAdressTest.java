@@ -1,4 +1,4 @@
-package Week_7;
+package Week_7.Exercise2;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
