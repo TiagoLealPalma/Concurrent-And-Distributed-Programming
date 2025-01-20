@@ -3,12 +3,11 @@ package Week_7.TestPractice;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Communications {
     private boolean running = true;
@@ -16,15 +15,18 @@ public class Communications {
     private ArrayList<BlockReplies> replies;
     private SharedWriter writer;
     private List<ObjectOutputStream> outs = new ArrayList<>();
+    private ExecutorService threadpool;
 
 
     public Communications(){
+        ExecutorService threadpool = Executors.newFixedThreadPool(10);
+
         new Thread(()->{
             try(ServerSocket ss = new ServerSocket(6969)){
 
                 while(running) {
                     Socket s = ss.accept();
-                    new Thread(() -> clientHandler(s)).start();
+                    threadpool.submit(() -> clientHandler(s));
                 }
 
             }catch(IOException e){}

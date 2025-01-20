@@ -1,13 +1,13 @@
 package Week_7.TestExercise2;
-
 import Week_7.TestPractice.BlockReplies;
 import Week_7.TestPractice.BlockRequest;
-
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WriterThread extends Thread {
     private CountDownLatch latch;
@@ -22,6 +22,7 @@ public class WriterThread extends Thread {
         for (Socket s : peers) {
             new Thread(() -> workerThreads(s)).start();
         }
+
     }
 
     @Override
@@ -89,6 +90,5 @@ public class WriterThread extends Thread {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
